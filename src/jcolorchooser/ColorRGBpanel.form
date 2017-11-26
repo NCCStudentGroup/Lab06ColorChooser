@@ -40,9 +40,6 @@
       </Properties>
     </Component>
     <Component class="regexfields.JIntegerField" name="jIntegerFieldGreen">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="jIntegerField2"/>
-      </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabelBlue">
       <Properties>
@@ -50,9 +47,6 @@
       </Properties>
     </Component>
     <Component class="regexfields.JIntegerField" name="jIntegerFieldBlue">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="jIntegerField3"/>
-      </Properties>
     </Component>
   </SubComponents>
 </Form>

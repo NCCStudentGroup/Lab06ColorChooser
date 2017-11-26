@@ -12,6 +12,8 @@ import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
+import static java.lang.Integer.parseInt;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -19,54 +21,96 @@ import javax.swing.event.DocumentListener;
  */
 public class ColorRGBpanel extends javax.swing.JPanel implements ColorListener, ChangeListener {
 
-    private Vector listeners; // To register listeners of this event    
+    private Vector changeColorListeners; // To register changeColorListeners of this event    
+    ColorRGBchangeListener changeRGBlistener; // My object to process changes in RGB fields
+
     /**
      * Creates new form ColorRGBpanel
      */
     public ColorRGBpanel() {
         initComponents();
-        
-        // Register to listen to changes in RGB fields 
-        ColorRGBchangeListener changeRGBlistener = new ColorRGBchangeListener();
 
-        jIntegerFieldRed.getDocument().addDocumentListener(changeRGBlistener);
-        jIntegerFieldGreen.getDocument().addDocumentListener(changeRGBlistener);
-//        jIntegerFieldBlue.getDocument().addDocumentListener(changeRGBlistener);
-        
-        jIntegerFieldBlue.getDocument().addDocumentListener(new DocumentListener (){
-
-            @Override
-            public void insertUpdate(DocumentEvent de) {
-                System.out.println("RGB insert");
-            }
-
-            @Override
-            public void removeUpdate(DocumentEvent de) {
-                System.out.println("RGB remove");
-            }
-
-            @Override
-            public void changedUpdate(DocumentEvent de) {
-                System.out.println("RGB change");            }
-        });
-
-        // Vector for storing external components registering for event from RGB panel
-        listeners = new Vector();
-        
         // Set reg expressions for RGB fields to accept values from 0 to 255
         jIntegerFieldRed.setExp("[0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5]");
         jIntegerFieldGreen.setExp("[0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5]");
         jIntegerFieldBlue.setExp("[0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5]");
 
+/*
+        // Register to listen to changes in RGB fields using my ColorRGBchangeListener
+        // See comments on use of external listener class in ColorRGBchangeListener
+        changeRGBlistener = new ColorRGBchangeListener();
+
+        jIntegerFieldRed.getDocument().addDocumentListener(changeRGBlistener);
+        jIntegerFieldGreen.getDocument().addDocumentListener(changeRGBlistener);
+        jIntegerFieldBlue.getDocument().addDocumentListener(changeRGBlistener);
+*/        
+        // Register to listen to changes in RGB fields using anonymous listener
+        jIntegerFieldRed.getDocument().addDocumentListener(new DocumentListener (){
+
+            @Override
+            public void insertUpdate(DocumentEvent de) {
+                stateChanged(new ChangeEvent(this)); // Don't really care what Change Event it is
+            }
+
+            @Override
+            public void removeUpdate(DocumentEvent de) {
+                stateChanged(new ChangeEvent(this));
+            }
+
+            @Override
+            public void changedUpdate(DocumentEvent de) {
+                stateChanged(new ChangeEvent(this)); 
+            }
+        });        
+        
+        jIntegerFieldGreen.getDocument().addDocumentListener(new DocumentListener (){
+
+            @Override
+            public void insertUpdate(DocumentEvent de) {
+                stateChanged(new ChangeEvent(this));
+            }
+
+            @Override
+            public void removeUpdate(DocumentEvent de) {
+                stateChanged(new ChangeEvent(this));
+            }
+
+            @Override
+            public void changedUpdate(DocumentEvent de) {
+                stateChanged(new ChangeEvent(this));
+            }
+        });
+
+        jIntegerFieldBlue.getDocument().addDocumentListener(new DocumentListener (){
+
+            @Override
+            public void insertUpdate(DocumentEvent de) {
+                stateChanged(new ChangeEvent(this));
+            }
+
+            @Override
+            public void removeUpdate(DocumentEvent de) {
+                stateChanged(new ChangeEvent(this));
+            }
+
+            @Override
+            public void changedUpdate(DocumentEvent de) {
+                stateChanged(new ChangeEvent(this));
+            }
+        });
+
+        // Vector for storing external components registering for event from RGB panel
+        changeColorListeners = new Vector();
+
     }
     
     // Methods to manage event subscription
     public void addColorListener(ColorListener colorListener){
-        listeners.addElement(colorListener);
+        changeColorListeners.addElement(colorListener);
     }
     
     public void removeColorListener(ColorListener colorListener){
-        listeners.removeElement(colorListener);
+        changeColorListeners.removeElement(colorListener);
     }
 
     /**
@@ -95,14 +139,10 @@ public class ColorRGBpanel extends javax.swing.JPanel implements ColorListener, 
 
         jLabelGreen.setText("GREEN");
         add(jLabelGreen);
-
-        jIntegerFieldGreen.setText("jIntegerField2");
         add(jIntegerFieldGreen);
 
         jLabelBlue.setText("BLUE");
         add(jLabelBlue);
-
-        jIntegerFieldBlue.setText("jIntegerField3");
         add(jIntegerFieldBlue);
     }// </editor-fold>//GEN-END:initComponents
 
@@ -136,17 +176,34 @@ public class ColorRGBpanel extends javax.swing.JPanel implements ColorListener, 
     @Override
     // Implementation of ChangeListener interface
     public void stateChanged(ChangeEvent ce) {
-         int r = parseInt(jIntegerFieldRed.getText());
-         int g = parseInt(jIntegerFieldRed.getText());
-         int b = parseInt(jIntegerFieldRed.getText());
-         Color color = new Color(r,g,b);
-         fireColorEvent(new ColorEvent(this,color));
+        int r, g, b;
+        try {
+            r = parseInt(jIntegerFieldRed.getText());
+        }
+        catch (NumberFormatException ex){
+            r = 0;
+        }
+        try {
+            g = parseInt(jIntegerFieldGreen.getText());
+        } 
+        catch (NumberFormatException ex){
+            g = 0;
+        }
+        try {
+            b = parseInt(jIntegerFieldBlue.getText());
+        }
+        catch (NumberFormatException ex){
+            b = 0;
+        }    
+    
+        Color color = new Color(r,g,b);
+        fireColorEvent(new ColorEvent(this,color));
     }
     
     private void fireColorEvent(ColorEvent ce){
         Vector v;
-        synchronized(listeners){
-            v = (Vector)listeners.clone();
+        synchronized(changeColorListeners){
+            v = (Vector)changeColorListeners.clone();
         }
         int size = v.size();
         for(int i=0; i<size; i++){
