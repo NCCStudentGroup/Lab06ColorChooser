@@ -16,17 +16,23 @@ public class ColorRGBchangeListener implements DocumentListener{
 
     @Override
     public void insertUpdate(DocumentEvent de) {
-        System.out.println("RGB insert");
+        // Need to call stateChanged() of RGB panel, but how do I get to it? 
+        // It is Event > Document > Field > Form?
+        // stateChanged(new ChangeEvent(this));
     }
 
     @Override
     public void removeUpdate(DocumentEvent de) {
-        System.out.println("RGB remove");
+        // Need to call stateChanged() of RGB panel, but how do I get to it? 
+        // It is Event > Document > Field > Form?
+        // stateChanged(new ChangeEvent(this));
     }
 
     @Override
     public void changedUpdate(DocumentEvent de) {
-        System.out.println("RGB change");
+        // Need to call stateChanged() of RGB panel, but how do I get to it? 
+        // It is Event > Document > Field > Form?
+        // stateChanged(new ChangeEvent(this));    
     }
     
 }
