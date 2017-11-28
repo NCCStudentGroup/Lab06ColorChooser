@@ -9,7 +9,7 @@ package jcolorchooser;
  *
  * @author 01533607
  */
-public class ColorChooserDialog extends javax.swing.JDialog {
+public class ColorChooserDialog extends javax.swing.JDialog  {
 
     /**
      * Creates new form ColorChooserDialog
@@ -20,11 +20,11 @@ public class ColorChooserDialog extends javax.swing.JDialog {
         
         // Add Canvas and RGB panel as listeners to Color change in Slider panel
         chooser.addColorListener(canvas);
-        chooser.addColorListener(colorRGBpanel);
+        //chooser.addColorListener(colorRGBpanel);
 
         // Add Canvas and Slider panel as listeners to Color change in RGB panel
         colorRGBpanel.addColorListener(canvas);
-        // colorRGBpanel.addColorListener(chooser); // Need to implement changeColor()
+        colorRGBpanel.addColorListener(chooser); // Need to implement changeColor()
     }
 
     /**
@@ -142,19 +142,6 @@ public class ColorChooserDialog extends javax.swing.JDialog {
         });
     }
     
-    /* 
-    processColorChangeEvent(Event ev){
-    
-    if (source == txtRed){
-        int red = parseInt(txtRed.getText());
-        chooser.setRed(red);}
-    if (source == txtRed){
-        int red = parseInt(txtRed.getText());
-        chooser.setRed(red);}    
-    if (source == txtRed){
-        int red = parseInt(txtRed.getText());
-        chooser.setRed(red);}    
-    */
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnDone;
@@ -162,4 +149,5 @@ public class ColorChooserDialog extends javax.swing.JDialog {
     private jcolorchooser.ColorChooser chooser;
     private jcolorchooser.ColorRGBpanel colorRGBpanel;
     // End of variables declaration//GEN-END:variables
+
 }
