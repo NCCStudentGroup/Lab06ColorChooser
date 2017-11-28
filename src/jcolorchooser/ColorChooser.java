@@ -14,7 +14,7 @@ import javax.swing.event.ChangeListener;
  *
  * @author 00220682
  */
-public class ColorChooser extends javax.swing.JPanel implements ChangeListener {
+public class ColorChooser extends javax.swing.JPanel implements ChangeListener, ColorListener {
     
     private Vector listeners;
 
@@ -112,5 +112,20 @@ public class ColorChooser extends javax.swing.JPanel implements ChangeListener {
             ColorListener colorListener = (ColorListener)v.elementAt(i);
             colorListener.changeColor(ce);
         }
+    }
+
+    // Listener to color change event - move sliders to reflect RGB values of event
+    @Override
+    public void changeColor(ColorEvent ce) {
+        // Ger RGB values
+        int r = ce.getColor().getRed();
+        int g = ce.getColor().getGreen();
+        int b = ce.getColor().getBlue();
+        
+        // Move sliders to show RGB values
+        sldRed.setValue(r);
+        sldGreen.setValue(g);
+        sldBlue.setValue(b);
+         
     }
 }
