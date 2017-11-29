@@ -166,11 +166,20 @@ public class ColorRGBpanel extends javax.swing.JPanel implements ColorListener, 
         // Set each of the fields to appropriate R, G, or B value
         Integer red = newColor.getRed();
         //jIntegerFieldRed.setText(String.format("%03d",red)); // does not work
-        jIntegerFieldRed.setText(red.toString());        
+        //jIntegerFieldRed.setText(red.toString());        
         Integer green = newColor.getGreen();
-        jIntegerFieldGreen.setText(green.toString());        
+        //jIntegerFieldGreen.setText(green.toString());        
         Integer blue = newColor.getBlue();
-        jIntegerFieldBlue.setText(blue.toString());        
+        //jIntegerFieldBlue.setText(blue.toString());
+        updateRGB(red, green, blue);
+    }
+
+
+    
+    private void updateRGB (Integer red, Integer green, Integer blue){
+        jIntegerFieldRed.setText(red.toString());        
+        jIntegerFieldGreen.setText(green.toString());        
+        jIntegerFieldBlue.setText(blue.toString());       
     }
 
     @Override
