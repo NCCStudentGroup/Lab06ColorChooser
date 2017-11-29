@@ -18,6 +18,7 @@ public class ColorCanvas extends javax.swing.JPanel implements ColorListener {
         setBackground(java.awt.Color.BLACK);
     }
 
+    // Consider running this through invokeLater
     @Override
     public void changeColor(ColorEvent ce) {
         setBackground(ce.getColor());

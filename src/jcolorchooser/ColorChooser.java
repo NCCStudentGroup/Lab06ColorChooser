@@ -134,8 +134,9 @@ public class ColorChooser extends javax.swing.JPanel implements ChangeListener, 
          
     }
     
+    //private void updateSliders(final int r, final int g, final int b){ // final was in the example, but does not 
     private void updateSliders(int r, int g, int b){
-        SwingUtilities.invokeLater(new Runnable () {
+       SwingUtilities.invokeLater(new Runnable () {
             public void run() {
                 sldRed.setValue(r);
                 sldGreen.setValue(g);

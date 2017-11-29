@@ -177,6 +177,7 @@ public class ColorRGBpanel extends javax.swing.JPanel implements ColorListener, 
 
 
     
+//    private void updateRGB (final Integer red, final Integer green, final Integer blue){ // final was in the example, but does not help
     private void updateRGB (Integer red, Integer green, Integer blue){
         SwingUtilities.invokeLater(new Runnable () {
             public void run() {
