@@ -36,7 +36,8 @@ public class ColorChooser extends javax.swing.JPanel implements ChangeListener, 
     public void removeColorListener(ColorListener colorListener){
         listeners.removeElement(colorListener);
     }
-    
+
+/*  // Not used, leftover from the previous implementation ideas   
     public void setRed(int red){
         sldRed.setValue(red);
     }
@@ -46,6 +47,8 @@ public class ColorChooser extends javax.swing.JPanel implements ChangeListener, 
     public void setBlue(int blue){
         sldBlue.setValue(blue);
     }
+*/    
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -123,9 +126,16 @@ public class ColorChooser extends javax.swing.JPanel implements ChangeListener, 
         int b = ce.getColor().getBlue();
         
         // Move sliders to show RGB values
+        //sldRed.setValue(r);
+        //sldGreen.setValue(g);
+        //sldBlue.setValue(b);
+        updateSliders(r, g, b);
+         
+    }
+    
+    private void updateSliders(int r, int g, int b){
         sldRed.setValue(r);
         sldGreen.setValue(g);
-        sldBlue.setValue(b);
-         
+        sldBlue.setValue(b);        
     }
 }
