@@ -20,7 +20,7 @@ public class ColorChooserDialog extends javax.swing.JDialog  {
         
         // Add Canvas and RGB panel as listeners to Color change in Slider panel
         chooser.addColorListener(canvas);
-        //chooser.addColorListener(colorRGBpanel);
+        chooser.addColorListener(colorRGBpanel);
 
         // Add Canvas and Slider panel as listeners to Color change in RGB panel
         colorRGBpanel.addColorListener(canvas);
