@@ -14,6 +14,7 @@ import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 import static java.lang.Integer.parseInt;
 import javax.swing.JOptionPane;
+import javax.swing.SwingUtilities;
 
 /**
  *
@@ -177,9 +178,13 @@ public class ColorRGBpanel extends javax.swing.JPanel implements ColorListener, 
 
     
     private void updateRGB (Integer red, Integer green, Integer blue){
-        jIntegerFieldRed.setText(red.toString());        
-        jIntegerFieldGreen.setText(green.toString());        
-        jIntegerFieldBlue.setText(blue.toString());       
+        SwingUtilities.invokeLater(new Runnable () {
+            public void run() {
+                jIntegerFieldRed.setText(red.toString());        
+                jIntegerFieldGreen.setText(green.toString());        
+                jIntegerFieldBlue.setText(blue.toString());       
+            }
+        });
     }
 
     @Override
