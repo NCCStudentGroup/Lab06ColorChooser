@@ -7,6 +7,7 @@ package jcolorchooser;
 
 import java.awt.Color;
 import java.util.Vector;
+import javax.swing.SwingUtilities;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 
@@ -134,8 +135,12 @@ public class ColorChooser extends javax.swing.JPanel implements ChangeListener, 
     }
     
     private void updateSliders(int r, int g, int b){
-        sldRed.setValue(r);
-        sldGreen.setValue(g);
-        sldBlue.setValue(b);        
+        SwingUtilities.invokeLater(new Runnable () {
+            public void run() {
+                sldRed.setValue(r);
+                sldGreen.setValue(g);
+                sldBlue.setValue(b);
+            }
+        });    
     }
 }
