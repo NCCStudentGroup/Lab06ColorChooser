@@ -11,7 +11,7 @@ import javax.swing.JPanel;
  *
  * @author 00220682
  */
-public class ColorCanvas extends JPanel implements ColorListener {
+public class ColorCanvas extends javax.swing.JPanel implements ColorListener {
     
     public ColorCanvas(){
         super();
