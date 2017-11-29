@@ -103,7 +103,11 @@ public class ColorChooser extends javax.swing.JPanel implements ChangeListener, 
          int g = sldGreen.getValue();
          int b = sldBlue.getValue();
          Color color = new Color(r,g,b);
-         fireColorEvent(new ColorEvent(this,color));
+
+         // Fire events only if RGB panel is in focus
+         if (sldRed.hasFocus() || sldGreen.hasFocus() || sldBlue.hasFocus()) {   
+            fireColorEvent(new ColorEvent(this,color));
+         }    
     }
     
     private void fireColorEvent(ColorEvent ce){
@@ -133,12 +137,12 @@ public class ColorChooser extends javax.swing.JPanel implements ChangeListener, 
     
     //private void updateSliders(final int r, final int g, final int b){ // final was in the example, but does not 
     private void updateSliders(int r, int g, int b){
-       SwingUtilities.invokeLater(new Runnable () {
-            public void run() {
+//       SwingUtilities.invokeLater(new Runnable () {
+//            public void run() {
                 sldRed.setValue(r);
                 sldGreen.setValue(g);
                 sldBlue.setValue(b);
-            }
-        });    
+//            }
+//        });    
     }
 }
