@@ -127,9 +127,6 @@ public class ColorChooser extends javax.swing.JPanel implements ChangeListener, 
         int b = ce.getColor().getBlue();
         
         // Move sliders to show RGB values
-        //sldRed.setValue(r);
-        //sldGreen.setValue(g);
-        //sldBlue.setValue(b);
         updateSliders(r, g, b);
          
     }

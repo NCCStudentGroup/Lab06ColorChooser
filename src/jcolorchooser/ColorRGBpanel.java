@@ -163,15 +163,11 @@ public class ColorRGBpanel extends javax.swing.JPanel implements ColorListener, 
         // Get color associated with ColorEvent
         Color newColor = ce.getColor();
 
-        // Get its RGB components
-        // Set each of the fields to appropriate R, G, or B value
+        // Get event Color RGB components
         Integer red = newColor.getRed();
-        //jIntegerFieldRed.setText(String.format("%03d",red)); // does not work
-        //jIntegerFieldRed.setText(red.toString());        
         Integer green = newColor.getGreen();
-        //jIntegerFieldGreen.setText(green.toString());        
         Integer blue = newColor.getBlue();
-        //jIntegerFieldBlue.setText(blue.toString());
+        // Set each of the fields to appropriate R, G, or B value
         updateRGB(red, green, blue);
     }
 
