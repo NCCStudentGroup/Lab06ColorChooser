@@ -5,7 +5,7 @@
  */
 package jcolorchooser;
 
-import com.sun.xml.internal.ws.util.StringUtils;
+//import com.sun.xml.internal.ws.util.StringUtils;
 
 /**
  *
