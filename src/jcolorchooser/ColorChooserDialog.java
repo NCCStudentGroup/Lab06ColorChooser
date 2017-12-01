@@ -5,6 +5,8 @@
  */
 package jcolorchooser;
 
+import java.awt.Color;
+
 /**
  *
  * @author 01533607
@@ -21,10 +23,12 @@ public class ColorChooserDialog extends javax.swing.JDialog  {
         // Add Canvas and RGB panel as listeners to Color change in Slider panel
         chooser.addColorListener(canvas);
         chooser.addColorListener(colorRGBpanel);
+        chooser.addColorListener(colorHEXPanel);
 
         // Add Canvas and Slider panel as listeners to Color change in RGB panel
         colorRGBpanel.addColorListener(canvas);
         colorRGBpanel.addColorListener(chooser); // Need to implement changeColor()
+        colorRGBpanel.addColorListener(colorHEXPanel);
     }
 
     /**
@@ -40,6 +44,7 @@ public class ColorChooserDialog extends javax.swing.JDialog  {
         chooser = new jcolorchooser.ColorChooser();
         btnDone = new javax.swing.JButton();
         colorRGBpanel = new jcolorchooser.ColorRGBpanel();
+        colorHEXPanel = new jcolorchooser.ColorHexPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("NCC Color Chooser");
@@ -70,13 +75,17 @@ public class ColorChooserDialog extends javax.swing.JDialog  {
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(canvas, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(colorRGBpanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(chooser, javax.swing.GroupLayout.DEFAULT_SIZE, 400, Short.MAX_VALUE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(btnDone)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addComponent(colorHEXPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(colorRGBpanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(18, 18, 18)
+                                .addComponent(chooser, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addGap(357, 357, 357)
+                                .addComponent(btnDone)))))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -89,7 +98,9 @@ public class ColorChooserDialog extends javax.swing.JDialog  {
                     .addComponent(colorRGBpanel, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(chooser, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addComponent(btnDone)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(btnDone, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(colorHEXPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -142,11 +153,15 @@ public class ColorChooserDialog extends javax.swing.JDialog  {
         });
     }
     
-
+        public Color getColor() {
+        return canvas.getBackground();
+    }
+        
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnDone;
     private jcolorchooser.ColorCanvas canvas;
     private jcolorchooser.ColorChooser chooser;
+    private jcolorchooser.ColorHexPanel colorHEXPanel;
     private jcolorchooser.ColorRGBpanel colorRGBpanel;
     // End of variables declaration//GEN-END:variables
 
