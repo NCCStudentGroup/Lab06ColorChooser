@@ -87,15 +87,19 @@ public class ColorChooser extends javax.swing.JPanel implements ChangeListener, 
 
     @Override
     public void stateChanged(ChangeEvent ce) {
+    SwingUtilities.invokeLater(new Runnable () {
+      public void run() {        
          int r = sldRed.getValue();
          int g = sldGreen.getValue();
          int b = sldBlue.getValue();
          Color color = new Color(r,g,b);
 
          // Fire events only if RGB panel is in focus
-         if (sldRed.hasFocus() || sldGreen.hasFocus() || sldBlue.hasFocus()) {   
+         //if (sldRed.hasFocus() || sldGreen.hasFocus() || sldBlue.hasFocus()) {   
             fireColorEvent(new ColorEvent(this,color));
-         }    
+         //} 
+      }
+    });         
     }
     
     private void fireColorEvent(ColorEvent ce){
