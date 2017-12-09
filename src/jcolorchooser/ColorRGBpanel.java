@@ -175,13 +175,11 @@ public class ColorRGBpanel extends javax.swing.JPanel implements ColorListener, 
     
 //    private void updateRGB (final Integer red, final Integer green, final Integer blue){ // final was in the example, but does not help
     private void updateRGB (Integer red, Integer green, Integer blue){
-//        SwingUtilities.invokeLater(new Runnable () {
-//            public void run() {
+
                 jIntegerFieldRed.setText(red.toString());        
                 jIntegerFieldGreen.setText(green.toString());        
                 jIntegerFieldBlue.setText(blue.toString());       
-//            }
-//        });
+
     }
 
     @Override
@@ -213,11 +211,10 @@ public class ColorRGBpanel extends javax.swing.JPanel implements ColorListener, 
         }    
     
         Color color = new Color(r,g,b);
-
         // Fire events only if RGB panel is in focus
         //if (jIntegerFieldRed.hasFocus() || jIntegerFieldGreen.hasFocus() || jIntegerFieldBlue.hasFocus()){
             fireColorEvent(new ColorEvent(this,color));
-        //}
+            //}
         }
     });     // End of invole later   
     }
