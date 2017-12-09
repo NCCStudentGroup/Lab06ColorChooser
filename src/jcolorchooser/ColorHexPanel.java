@@ -59,7 +59,7 @@ public class ColorHexPanel extends javax.swing.JPanel implements ColorListener {
     @Override
     public void changeColor(ColorEvent ce) {
 
-        String hexRed = (Integer.toHexString(ce.getColor().getRed())).toUpperCase();
+/*        String hexRed = (Integer.toHexString(ce.getColor().getRed())).toUpperCase();
         String hexGreen = (Integer.toHexString(ce.getColor().getGreen())).toUpperCase();
         String hexBlue = (Integer.toHexString(ce.getColor().getBlue())).toUpperCase();
         
@@ -73,7 +73,15 @@ public class ColorHexPanel extends javax.swing.JPanel implements ColorListener {
         }
         if (hexBlue.length() == 1){
             hexBlue = "0" + hexBlue;
-        }        
-
-        jTextFieldHEX.setText("#" + hexRed + hexGreen +hexBlue);    }
+       }        
+        
+        jTextFieldHEX.setText("#" + hexRed + hexGreen +hexBlue);    }        
+*/ 
+        String color = String.format("#%02x%02x%02x", 
+                ce.getColor().getRed(),
+                ce.getColor().getGreen(),
+                ce.getColor().getBlue());
+        
+        jTextFieldHEX.setText(color.toUpperCase());
+    }    
 }
